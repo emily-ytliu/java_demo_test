@@ -47,7 +47,7 @@ public class BankServiceImpl implements BankService {  //實作BankService這個介面
 		//條件: (1)不能是null (2)長度3~8 (3)不能有任何空白 (4)不能有特殊符號(~!@#$%&?*...) 
 		//有長度限制 → 用正規表達
 		String account = bank.getAccount();
-		String pattern1 = "\\w{3,8}";  //  \w是可以 數字、字母、底線 [A-Za-z0-9]
+		String pattern1 = "\\w{3,8}";  //  \w是可以 數字、字母、底線 [A-Za-z0-9_]
 		if (account == null || !account.matches(pattern1)) {
 			System.out.println("帳號不符合規定!!");
 			return;
@@ -56,7 +56,7 @@ public class BankServiceImpl implements BankService {  //實作BankService這個介面
 	
 	private void checkPwd(Bank bank) {
 		//檢查3 密碼
-		//條件: (1)不能是null (2)長度8~16 (3)不能有任何空白 
+		//條件: (1)不能是null (2)長度8~16 (3)不能有任何空白 (4)可以有特殊符號
 		String pwd = bank.getPwd();
 		String pattern2 = "\\S{8,16}";  //  \S是不行 空白、定位、Tab鍵、換行、換頁字元
 //		String pattern2 = "[\\w~!@#$%^&*]{8,16}"
@@ -154,9 +154,6 @@ public class BankServiceImpl implements BankService {  //實作BankService這個介面
 		resBank.setAmount(newAmount);  //設定存款後的金額
 		
 		return new BankResponse(bankDao.save(resBank), "存款成功");  //bankDao.save(resBank) 存到資料庫
-		
-		
-		
 	}
 	
 	//提款
@@ -188,5 +185,6 @@ public class BankServiceImpl implements BankService {  //實作BankService這個介面
 	
 
 }
+
 
 

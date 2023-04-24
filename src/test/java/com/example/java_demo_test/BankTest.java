@@ -48,9 +48,9 @@ public class BankTest {
 		
 		//存款
 		Bank newBank = new Bank("AA999", "AA123456@", 3000);
-		BankResponse response = bankService.deposit(newBank);
+		BankResponse response = bankService.deposit(newBank);  //*response
 		//確認金額有存進去  //Assert.isTrue確認程式碼有沒有錯
-		Bank resBank = response.getBank(); 
+		Bank resBank = response.getBank();   //*response
 		Assert.isTrue(resBank.getAmount() == oldBank.getAmount() + newBank.getAmount(), "存款錯誤");
 		Assert.isTrue(response.getMessage().equals("存款成功"), "存款失敗");
 		//刪除測試資料
@@ -63,13 +63,15 @@ public class BankTest {
 		Bank oldBank = bankDao.save(new Bank("AA999", "AA123456@", 2000));
 		//提款
 		Bank newBank = new Bank("AA999", "AA123456@", 500);
-		BankResponse response = bankService.withdraw(newBank);  //*把
+		BankResponse response = bankService.withdraw(newBank);  //*response: 因為BankResponse有帶入Bank 所以可以用Bank
 		//確認提款後餘額有變  //Assert.isTrue確認程式碼有沒有錯
-		Bank resBank = response.getBank();  //*
+		Bank resBank = response.getBank();  //*response
 		Assert.isTrue(resBank.getAmount() == oldBank.getAmount() - newBank.getAmount(), "提款錯誤");
 		Assert.isTrue(response.getMessage().equals("提款成功"), "提款失敗");
+//		System.out.println("帳號: " + resBank.getAccount() + "密碼: " + resBank.getPwd());
 		//刪除測試資料
 		bankDao.delete(resBank);
 	}
 
 }
+
