@@ -2,7 +2,12 @@ package com.example.java_demo_test.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.java_demo_test.entity.PersonInfo;
@@ -29,6 +34,48 @@ public interface PersonInfoDao extends JpaRepository<PersonInfo, String>{
 	
 	public List<PersonInfo> findByAgeGreaterThanAndCityContainingOrderByAgeDesc(int age, String city); //2個欄位用And連接
 	
-
+	//===EntityManager=====================
+	public List<PersonInfo> doQueryByAge(int age);
+	
+	public List<PersonInfo> doQueryByAge(int age, int limitSize);
+	
+	public List<PersonInfo> doQueryByAge(int age, int limitSize, int startPosition);
+	
+	//更新
+	@Transactional  //EntityManager: SQL update要加上
+	public int doUpdateAgeByName(int age, String name);
+	
+	//====JPQL=============================
+	
+	//@Query寫法: JPQL update要加上
+//	@Transactional
+//	@Modifying
+	
+//	@Transactional
+//	@Modifying  //DML
+//	@Query("update PersonInfo p set p.id = :newId, p.name = :newName, p.age = :newAge, p.city = :newCity"
+//			+ " where p.id = :newId")  //要enter下一行，要記得空格再下一行，或者下一行後要空格!!!!!!
+//	//update Entity名稱 (as)別名 set 別名.屬性名 = :自訂參數名
+//	public int updateNameById(
+//			@Param("newId") String inputId, 
+//			@Param("newName") String inputName, 
+//			@Param("newAge") int inputAge, 
+//			@Param("newCity") String inputCity);
+//	//update成功是1，失敗是0
+	
+	//只修改name，可以只寫name就好
+	@Transactional
+	@Modifying  //DML
+	@Query("update PersonInfo p set p.id = :newId, p.name = :newName "
+			+ "where p.id = :newId")  //要enter下一行，要記得先空格再下一行，或者下一行後要空格!!!!!!
+	//update Entity名稱 (as)別名 set 別名.資料庫欄位名 = :自訂參數名
+	public int updateNameById(
+			@Param("newId") String inputId, 
+			@Param("newName") String inputName);
+	
+	//可以省去兩個Dao的操作
+	//insert語法，要加上nativeQuery = true (預設是false)
+	//照片
+	
 }
 

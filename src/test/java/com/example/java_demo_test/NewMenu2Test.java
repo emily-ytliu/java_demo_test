@@ -14,7 +14,7 @@ import com.example.java_demo_test.repository.NewMenu2Dao;
 public class NewMenu2Test {
 
 	@Autowired
-	NewMenu2Dao newMenu2Dao;
+	private NewMenu2Dao newMenu2Dao;
 	
 	@Test
 	public void addDataTest() {

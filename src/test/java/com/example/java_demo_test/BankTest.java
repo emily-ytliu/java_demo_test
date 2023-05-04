@@ -1,5 +1,7 @@
 package com.example.java_demo_test;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +20,20 @@ public class BankTest {
 	
 	@Autowired
 	private BankService bankService;
+	
+	
+	//新增假資料 (每一個方法前後)
+	@BeforeEach
+	public void beforeEach() {
+		
+	}
+	
+	//刪除假資料 (每一個方法前後)
+	@AfterEach
+	public void aftereEach() {
+		
+	}
+	
 	
 	@Test
 	public void addBankInfo() {  //*寫死資料
@@ -71,6 +87,17 @@ public class BankTest {
 //		System.out.println("帳號: " + resBank.getAccount() + "密碼: " + resBank.getPwd());
 		//刪除測試資料
 		bankDao.delete(resBank);
+	}
+	
+	@Test
+	public void test() {
+		int[] ary1 = {10, 20 ,30 ,40};
+		int[] ary2 = new int[2];
+		ary2 = ary1;
+		for(int val : ary2) {
+			System.out.println(val);
+		}
+		
 	}
 
 }
