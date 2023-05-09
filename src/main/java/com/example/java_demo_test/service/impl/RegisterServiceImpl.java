@@ -21,7 +21,7 @@ public class RegisterServiceImpl implements RegisterService{
 	@Override
 	public RegisterResponse register(String account, String pwd) {
 		//¨¾§b
-		if (!StringUtils.hasText(account) || StringUtils.hasText(pwd)) {
+		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new RegisterResponse("Data error!");
 		}
 		
@@ -42,7 +42,7 @@ public class RegisterServiceImpl implements RegisterService{
 	@Override
 	public RegisterResponse active(String account, String pwd) {
 		//¨¾§b
-		if (!StringUtils.hasText(account) || StringUtils.hasText(pwd)) {
+		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new RegisterResponse("Data error!");
 		}
 		
@@ -66,11 +66,11 @@ public class RegisterServiceImpl implements RegisterService{
 	@Override
 	public RegisterResponse login(String account, String pwd) {
 		//¨¾§b
-		if (!StringUtils.hasText(account) || StringUtils.hasText(pwd)) {
+		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new RegisterResponse("Data error!");
 		}
 		
-		Register res = registerDao.findByAccountAndPwdAndActive(account, pwd, true);
+		Register res = registerDao.findByAccountAndPwdAndIsActive(account, pwd, true);
 		
 		if (res == null) {
 			return new RegisterResponse("Account or password is wrong or account does not exist or account does not active!");
@@ -82,11 +82,11 @@ public class RegisterServiceImpl implements RegisterService{
 	@Override
 	public RegisterResponse getRegTime(String account, String pwd) {
 		//¨¾§b
-		if (!StringUtils.hasText(account) || StringUtils.hasText(pwd)) {
+		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new RegisterResponse("Data error!");
 		}
 		
-		Register res = registerDao.findByAccountAndPwdAndActive(account, pwd, true);
+		Register res = registerDao.findByAccountAndPwdAndIsActive(account, pwd, true);
 		
 		if (res == null) {
 			return new RegisterResponse("Account or password is wrong or account does not exist or account does not active!");

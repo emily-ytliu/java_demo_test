@@ -12,5 +12,5 @@ public interface RegisterDao extends JpaRepository<Register, String>{
 
 	public Register findByAccountAndPwd(String account, String pwd);
 	
-	public Register findByAccountAndPwdAndActive(String account, String pwd, boolean isActive);
+	public Register findByAccountAndPwdAndIsActive(String account, String pwd, boolean isActive);
 }
