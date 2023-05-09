@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -20,6 +22,12 @@ import com.example.java_demo_test.vo.OrderResponse;
 
 @Service
 public class OrderServiceImpl implements OrderService{
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());  //import slf4j的
+	/*
+	 * 可以加上: logger.
+	 * 例如 logger.info()
+	 */
 	
 	@Autowired
 	private OrderDao orderDao;
@@ -35,6 +43,9 @@ public class OrderServiceImpl implements OrderService{
 		if (!op.isPresent()) {
 			return new GetMenuResponse("無此餐點");
 		}
+		
+		logger.info("You can write what you want");
+		
 		return new GetMenuResponse(op.get(), "成功");
 		
 		//我的寫法 錯

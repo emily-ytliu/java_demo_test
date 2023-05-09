@@ -14,6 +14,10 @@ import com.example.java_demo_test.vo.GetMenuResponse;
 import com.example.java_demo_test.vo.OrderRequest;
 import com.example.java_demo_test.vo.OrderResponse;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
+//import springfox.documentation.annotations.ApiIgnore;
+
 @RestController
 public class OrderController {
 
@@ -31,6 +35,8 @@ public class OrderController {
 		return orderService.getAllMenus();
 	}
 	
+//	@ApiIgnore  //springfox-boot-starter: 加上at ApiIgnore 會讓 swagger 不顯示此API 
+	@Hidden  //springdoc-openapi: 加上at Hidden 會讓 swagger 不顯示此API 
 	@PostMapping(value = "add_menus")  //連結外部
 	public OrderResponse addMenus(@RequestBody OrderRequest request) {  //@RequestBody將PostMan輸入的value帶入
 		return orderService.addMenus(request.getMenus());

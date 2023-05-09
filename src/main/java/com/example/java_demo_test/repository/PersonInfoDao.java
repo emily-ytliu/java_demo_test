@@ -41,6 +41,27 @@ public interface PersonInfoDao extends JpaRepository<PersonInfo, String>{
 	
 	public List<PersonInfo> doQueryByAge(int age, int limitSize, int startPosition);
 	
+	
+	//笆篈把计琩高(like + 家絢琩高 + or)
+	/*
+	 * ㄢ把计常⊿穓碝挡狦琌 场 戈
+	 * ㄢ把计常⊿穓碝挡狦琌 ⊿ 戈
+	 */
+	
+	//JPA
+	public List<PersonInfo> findByNameContainingOrCityContaining(String name, String city);
+	
+	//at Query
+	@Query("SELECT p FROM PersonInfo p "
+			+ "WHERE p.name LIKE %:inputName% OR p.city LIKE %:inputCity%")
+	public List<PersonInfo> searchNameOrCityQuery(@Param("inputName") String name, @Param("inputCity") String city);
+	
+	//REGEXP
+	@Query(value = "SELECT * FROM person_info p "
+			+ "WHERE p.name REGEXP :inputName OR p.city REGEXP :inputCity", nativeQuery = true)
+	public List<PersonInfo> searchNameOrCityRegexp(@Param("inputName") String name, @Param("inputCity") String city);
+	
+	
 	//穝
 	@Transactional  //EntityManager: SQL update璶
 	public int doUpdateAgeByName(int age, String name);
