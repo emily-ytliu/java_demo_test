@@ -20,7 +20,7 @@ import com.example.java_demo_test.vo.PersonInfoResponse;
 public class PersonInfoController {
 
 	@Autowired
-	public PersonInfoService personInfoService;
+	private PersonInfoService personInfoService;
 	
 	@PostMapping(value = "add_person_info")  //連結外部
 	public PersonInfoResponse addPersonInfo(@RequestBody AddPersonInfoRequest request) {  //@RequestBody將PostMan輸入的value帶入

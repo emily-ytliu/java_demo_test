@@ -1,7 +1,12 @@
 package com.example.java_demo_test.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RegisterRequest {
 
+	@JsonProperty("verify_code")
+	private int verifyCode;
+	
 	private String account;
 	
 	private String pwd;
@@ -14,6 +19,14 @@ public class RegisterRequest {
 		super();
 		this.account = account;
 		this.pwd = pwd;
+	}
+	
+	public int getVerifyCode() {
+		return verifyCode;
+	}
+
+	public void setVerifyCode(int verifyCode) {
+		this.verifyCode = verifyCode;
 	}
 
 	public String getAccount() {
