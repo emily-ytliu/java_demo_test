@@ -1,9 +1,13 @@
 package com.example.java_demo_test.service.impl;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -13,6 +17,7 @@ import com.example.java_demo_test.service.ifs.RegisterService;
 import com.example.java_demo_test.vo.RegisterRequest;
 import com.example.java_demo_test.vo.RegisterResponse;
 
+@EnableScheduling
 @Service
 public class RegisterServiceImpl implements RegisterService{
 
@@ -107,4 +112,10 @@ public class RegisterServiceImpl implements RegisterService{
 		return new RegisterResponse(res.getRegTime(), "Successful!");
 	}
 
+	//排程練習
+	@Scheduled(cron = "0 0 10 * * *")  //每天早上10點執行一次
+	//        (cron = "0 * 14-16 * * *")  //每天下午14-16點 每分鐘執行一次
+	public void scheduleTest() {
+		System.out.println("now: " + LocalTime.now());
+	}
 }

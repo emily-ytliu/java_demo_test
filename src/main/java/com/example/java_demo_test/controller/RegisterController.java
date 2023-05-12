@@ -18,7 +18,7 @@ public class RegisterController {
 	@Autowired
 	private RegisterService registerService;
 	
-	@PostMapping(value = "register")
+	@PostMapping(value = "api/register")
 	public RegisterResponse register(@RequestBody RegisterRequest request) {
 		return registerService.register(request.getAccount(), request.getPwd());
 	}
