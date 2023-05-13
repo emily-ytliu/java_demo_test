@@ -45,7 +45,7 @@ public class ApiTest {
 	
 	@Test
 	public void postApiTest() {
-		String targetUrl = "http://172.20.10.3:8080/api/register";
+		String targetUrl = "http://172.20.10.3:8080/register";
 		Map<String, String> bodyMap = new HashMap<>();
 		bodyMap.put("account", "golden retriever");
 		bodyMap.put("pwd", "AA123");

@@ -15,4 +15,5 @@ public interface RegisterService {
 	public RegisterResponse getRegTime(String account, String pwd);
 	
 	public RegisterResponse getRegTime2(RegisterRequest request, String account, String pwd, Integer veridyCode);
+	
 }

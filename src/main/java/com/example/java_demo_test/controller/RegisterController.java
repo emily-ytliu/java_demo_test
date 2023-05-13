@@ -18,7 +18,7 @@ public class RegisterController {
 	@Autowired
 	private RegisterService registerService;
 	
-	@PostMapping(value = "api/register")
+	@PostMapping(value = "register")
 	public RegisterResponse register(@RequestBody RegisterRequest request) {
 		return registerService.register(request.getAccount(), request.getPwd());
 	}
@@ -84,4 +84,12 @@ public class RegisterController {
 		//request是要帶入輸入的verifyCode
 		return registerService.getRegTime2(request, sessionAccount, sessionPwd, sessionVerifyCode);
 		}
+	
+	@PostMapping(value = "logout")
+	public RegisterResponse logout(HttpSession httpSession) {
+//		System.out.println(httpSession.getId());
+		httpSession.removeAttribute("account");
+		httpSession.removeAttribute("pwd");
+		return new RegisterResponse("Logout successful!");
+	}
 }
