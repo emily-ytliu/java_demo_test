@@ -46,6 +46,9 @@ public class RegisterController {
 			res.setSessionId(httpSession.getId());
 			res.setVerifyCode(verifyCode);
 		}
+		
+		System.out.println(httpSession.getId());
+		
 		return res;
 	}
 	
@@ -60,6 +63,10 @@ public class RegisterController {
 		//因為setAttribute(key: String, value: Object)，所以getAttribute("account")也是Object，因此要強制轉型回(String)
 		String account = (String) httpSession.getAttribute("account");  
 		String pwd = (String) httpSession.getAttribute("pwd");
+		
+		System.out.println(account);
+		System.out.println(pwd);
+		
 		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new RegisterResponse("Please login!");
 		}
@@ -70,6 +77,8 @@ public class RegisterController {
 		if (verifyCode == null || verifyCode != request.getVerifyCode()) {
 			return new RegisterResponse("Verify code incorrect!");
 		}
+		
+		System.out.println(httpSession.getId());
 		
 		return registerService.getRegTime(account, pwd);
 	}
